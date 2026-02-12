@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radhe Radhe Sir 🙏</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e3f2fd, #ffffff, #fff8e1);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Floating spiritual symbols */
+.symbol {
+    position: absolute;
+    font-size: 22px;
+    opacity: 0.25;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    20% { opacity: 0.25; }
+    80% { opacity: 0.25; }
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* Main card */
+.card {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.08);
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+h2 {
+    color: #0d47a1;
+}
+
+p {
+    color: #333;
+    font-size: 17px;
+}
+
+button {
+    padding: 12px 28px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #64b5f6, #ffd54f);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- floating symbols -->
+<div class="symbol" style="left:10%; animation-delay:0s;">ॐ</div>
+<div class="symbol" style="left:30%; animation-delay:5s;">✨</div>
+<div class="symbol" style="left:50%; animation-delay:10s;">🪷</div>
+<div class="symbol" style="left:70%; animation-delay:15s;">🪶</div>
+<div class="symbol" style="left:85%; animation-delay:7s;">✨</div>
+
+<div class="card" id="card">
+
+<h2 id="title">Radhe Radhe Sir 🙏</h2>
+
+<p id="text">
+Some teachers teach…<br>
+Some teachers guide…<br>
+But rare ones transform lives.<br><br>
+This is a small expression of gratitude.
+</p>
+
+<div id="buttons">
+<button onclick="start()">Start</button>
+</div>
+
+</div>
+
+<script>
+
+let step = 0;
+
+const questions = [
+
+{
+q:"Do you believe meeting some teachers is God's blessing?",
+yes:"Radhe Radhe Sir 🙏<br>I truly feel blessed that God chose you as my guide.",
+no:"Radhe Radhe Sir 🙏<br>Then I would say God personally guided me to you."
+},
+
+{
+q:"Do you know you are the reason I chose CA seriously?",
+yes:"Then you already know how deeply your words shaped my future.",
+no:"Without your motivation, I might never have discovered my true potential."
+},
+
+{
+q:"Do you realize how much your support matters to me?",
+yes:"Your support gives me strength on the toughest days.",
+no:"Your support silently gives me confidence whenever I doubt myself."
+},
+
+{
+q:"Do you know how rare it is to find a teacher like you?",
+yes:"That’s what makes you truly special, Sir.",
+no:"Your understanding nature makes students feel safe."
+},
+
+{
+q:"Does your Radhe Radhe spread positivity?",
+yes:"It reminds me to stay grounded and peaceful.",
+no:"It teaches spirituality beyond books."
+},
+
+{
+q:"Do you know you protect me like a big brother?",
+yes:"I feel lucky to have your protection and guidance.",
+no:"Your care makes me feel I am never alone."
+},
+
+{
+q:"Are you more than just a teacher to me?",
+yes:"You are a mentor who changed my life direction.",
+no:"You shaped both my career and mindset."
+},
+
+{
+q:"Can I ever fully thank you?",
+yes:"I promise to make you proud through my success.",
+no:"I will try every day through my dedication."
+}
+
+];
+
+function start(){
+step = 0;
+showQuestion();
+}
+
+function showQuestion(){
+
+document.getElementById("title").innerHTML="Question";
+
+document.getElementById("text").innerHTML=questions[step].q;
+
+document.getElementById("buttons").innerHTML=`
+<button onclick="answer('yes')">Yes</button>
+<button onclick="answer('no')">No</button>
+`;
+
+}
+
+function answer(type){
+
+document.getElementById("text").innerHTML=questions[step][type];
+
+document.getElementById("buttons").innerHTML=
+`<button onclick="next()">Next</button>`;
+
+}
+
+function next(){
+
+step++;
+
+if(step < questions.length){
+showQuestion();
+}
+else{
+showFinal();
+}
+
+}
+
+function showFinal(){
+
+document.getElementById("title").innerHTML="Radhe Radhe Sir 🙏";
+
+document.getElementById("text").innerHTML=`
+Thank you for guiding me toward CA,<br>
+for supporting me,<br>
+for understanding me,<br>
+and for believing in me.<br><br>
+
+You didn’t just teach subjects…<br>
+You helped shape my life.<br><br>
+
+I will always remain grateful.<br><br>
+
+— Rahul
+`;
+
+document.getElementById("buttons").innerHTML="";
+
+}
+
+</script>
+
+</body>
+</html>
