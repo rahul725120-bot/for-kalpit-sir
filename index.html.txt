@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radhe Radhe Sir 🙏</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+height:100vh;
+overflow:hidden;
+background: linear-gradient(135deg,#ffd6e8,#fff0f6,#ffe3ec,#fff5fa);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* floating spiritual symbols */
+
+.symbol{
+position:absolute;
+font-size:26px;
+opacity:0.35;
+animation:float 18s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0;}
+20%{opacity:0.35;}
+80%{opacity:0.35;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* card */
+
+.card{
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(15px);
+padding:35px;
+border-radius:25px;
+width:90%;
+max-width:420px;
+text-align:center;
+box-shadow:0 8px 32px rgba(255,182,193,0.4);
+}
+
+h2{
+color:#d63384;
+}
+
+p{
+font-size:18px;
+color:#444;
+line-height:1.6;
+min-height:80px;
+}
+
+/* buttons */
+
+button{
+background: linear-gradient(45deg,#ff8fab,#ffb3c6);
+border:none;
+padding:12px 28px;
+margin:8px;
+border-radius:25px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.08);
+box-shadow:0 0 15px rgba(255,105,135,0.5);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- floating symbols -->
+
+<div class="symbol" style="left:10%;">🪶</div>
+<div class="symbol" style="left:30%;">🦚</div>
+<div class="symbol" style="left:50%;">🪶</div>
+<div class="symbol" style="left:70%;">✨</div>
+<div class="symbol" style="left:85%;">🦚</div>
+
+<div class="card">
+
+<h2>Radhe Radhe Sir 🙏</h2>
+
+<p id="text"></p>
+
+<div id="buttons"></div>
+
+</div>
+
+<script>
+
+let step=0;
+
+const flow=[
+
+{
+type:"message",
+text:"Some teachers teach...<br>Some guide...<br>But rare ones transform lives.",
+button:"Continue"
+},
+
+{
+type:"question",
+text:"Do you believe meeting some teachers is God's blessing?",
+yes:"Radhe Radhe Sir 🙏<br>I truly feel blessed that God chose you.",
+no:"Radhe Radhe Sir 🙏<br>I believe God personally guided me to you."
+},
+
+{
+type:"message",
+text:"Sir, you didn't just teach subjects...<br>You gave direction to my life.",
+button:"Next"
+},
+
+{
+type:"question",
+text:"Do you know you are the reason I chose CA seriously?",
+yes:"Your words gave me clarity and confidence.",
+no:"Without you, I might never have chosen this path."
+},
+
+{
+type:"message",
+text:"Your support always gives me silent strength.",
+button:"Continue"
+},
+
+{
+type:"question",
+text:"Do you realize how special your guidance is?",
+yes:"That is why students trust you deeply.",
+no:"Your nature makes students feel understood."
+},
+
+{
+type:"message",
+text:"Your 'Radhe Radhe' brings calm and positivity.",
+button:"Next"
+},
+
+{
+type:"question",
+text:"Can I ever fully thank you?",
+yes:"I promise to make you proud one day.",
+no:"I will express gratitude through my success."
+},
+
+{
+type:"final",
+text:"Thank you for guiding me toward CA,<br>for supporting me,<br>and for believing in me.<br><br>Always grateful.<br><br>— Rahul"
+}
+
+];
+
+/* typing animation */
+
+function typeText(text,callback){
+
+let element=document.getElementById("text");
+
+element.innerHTML="";
+
+let i=0;
+
+function typing(){
+
+if(i<text.length){
+
+if(text.charAt(i)=="<"){
+
+let tag="";
+while(text.charAt(i)!=">"){
+tag+=text.charAt(i);
+i++;
+}
+tag+=">";
+element.innerHTML+=tag;
+i++;
+
+}else{
+
+element.innerHTML+=text.charAt(i);
+i++;
+
+}
+
+setTimeout(typing,30);
+
+}else{
+
+if(callback)callback();
+
+}
+
+}
+
+typing();
+
+}
+
+/* show step */
+
+function showStep(){
+
+let item=flow[step];
+
+typeText(item.text,function(){
+
+if(item.type=="message"){
+
+document.getElementById("buttons").innerHTML=
+`<button onclick="nextStep()">${item.button}</button>`;
+
+}
+
+else if(item.type=="question"){
+
+document.getElementById("buttons").innerHTML=
+`<button onclick="answer('yes')">Yes</button>
+<button onclick="answer('no')">No</button>`;
+
+}
+
+else{
+
+document.getElementById("buttons").innerHTML="";
+
+}
+
+});
+
+}
+
+/* answer */
+
+function answer(choice){
+
+let item=flow[step];
+
+typeText(item[choice],function(){
+
+document.getElementById("buttons").innerHTML=
+`<button onclick="nextStep()">Continue</button>`;
+
+});
+
+}
+
+/* next */
+
+function nextStep(){
+
+step++;
+
+showStep();
+
+}
+
+/* start */
+
+showStep();
+
+</script>
+
+</body>
+</html>
