@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Radhe Radhe Sir 🙏</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+height:100vh;
+overflow:hidden;
+
+background: linear-gradient(135deg,#ffd6e8,#fff0f6,#ffe3ec,#fff5fa);
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* floating morpankh */
+
+.symbol{
+position:absolute;
+font-size:28px;
+opacity:0.35;
+animation:float 18s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0;}
+20%{opacity:0.35;}
+80%{opacity:0.35;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* card */
+
+.card{
+
+background:rgba(255,255,255,0.75);
+backdrop-filter:blur(15px);
+
+padding:35px;
+border-radius:25px;
+
+width:90%;
+max-width:420px;
+
+text-align:center;
+
+box-shadow:0 8px 32px rgba(255,182,193,0.4);
+
+}
+
+/* fade animation */
+
+.fade{
+animation:fadeEffect 0.6s ease;
+}
+
+@keyframes fadeEffect{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+h2{
+color:#d63384;
+margin-bottom:15px;
+}
+
+p{
+font-size:17px;
+color:#444;
+line-height:1.6;
+min-height:60px;
+}
+
+/* buttons */
+
+button{
+
+background: linear-gradient(45deg,#ff8fab,#ffb3c6);
+
+border:none;
+padding:12px 28px;
+margin:8px;
+
+border-radius:25px;
+
+color:white;
+font-size:16px;
+
+cursor:pointer;
+
+transition:0.3s;
+}
+
+button:hover{
+
+transform:scale(1.08);
+box-shadow:0 0 15px rgba(255,105,135,0.5);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- flute audio -->
+
+<audio id="flute" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<!-- floating symbols -->
+
+<div class="symbol" style="left:10%;animation-duration:15s;">🪶</div>
+<div class="symbol" style="left:30%;animation-duration:18s;">🦚</div>
+<div class="symbol" style="left:50%;animation-duration:20s;">🪶</div>
+<div class="symbol" style="left:70%;animation-duration:17s;">✨</div>
+<div class="symbol" style="left:85%;animation-duration:19s;">🦚</div>
+
+<!-- card -->
+
+<div class="card">
+
+<h2 id="title">Radhe Radhe Sir 🙏</h2>
+
+<p id="content" class="fade">
+
+Some teachers teach…<br>
+Some teachers guide…<br>
+But rare ones transform lives.<br><br>
+
+This is a small expression of gratitude.
+
+</p>
+
+<div id="buttons">
+
+<button onclick="startJourney()">Start</button>
+
+</div>
+
+</div>
+
+<script>
+
+let flute=document.getElementById("flute");
+flute.volume=0.15;
+
+let current=0;
+let showingAnswer=false;
+
+const data=[
+
+{
+q:"Do you believe meeting some teachers is God's blessing?",
+yes:"Radhe Radhe Sir 🙏<br>I truly feel blessed that God chose you as my guide.",
+no:"Radhe Radhe Sir 🙏<br>Then I believe God personally guided me to you."
+},
+
+{
+q:"Do you know you are the reason I chose CA seriously?",
+yes:"Then you know how deeply your words shaped my future.",
+no:"Without your motivation, I might never have chosen this path."
+},
+
+{
+q:"Do you realize how much your support matters to me?",
+yes:"Your support gives me strength in difficult moments.",
+no:"Your support silently builds my confidence."
+},
+
+{
+q:"Do you know how rare a teacher like you is?",
+yes:"That’s what makes you truly special, Sir.",
+no:"Your understanding nature makes you different."
+},
+
+{
+q:"Does your Radhe Radhe spread positivity?",
+yes:"It reminds me to stay calm and focused.",
+no:"It teaches spirituality beyond academics."
+},
+
+{
+q:"Do you know you guide me like a big brother?",
+yes:"I feel safe and supported because of you.",
+no:"Your care makes me feel protected."
+},
+
+{
+q:"Are you more than just a teacher to me?",
+yes:"You are a mentor who shaped my life.",
+no:"You changed my thinking and direction."
+},
+
+{
+q:"Can I ever fully thank you?",
+yes:"I promise to make you proud.",
+no:"I will express gratitude through my success."
+}
+
+];
+
+function animateText(text){
+
+let content=document.getElementById("content");
+
+content.classList.remove("fade");
+
+setTimeout(()=>{
+content.innerHTML=text;
+content.classList.add("fade");
+},50);
+
+}
+
+function startJourney(){
+
+flute.play();
+
+current=0;
+showQuestion();
+
+}
+
+function showQuestion(){
+
+showingAnswer=false;
+
+document.getElementById("title").innerHTML="Question "+(current+1);
+
+animateText(data[current].q);
+
+document.getElementById("buttons").innerHTML=
+
+`<button onclick="answer('yes')">Yes</button>
+<button onclick="answer('no')">No</button>`;
+
+}
+
+function answer(type){
+
+showingAnswer=true;
+
+animateText(data[current][type]);
+
+document.getElementById("buttons").innerHTML=
+
+`<button onclick="next()">Next</button>`;
+
+}
+
+function next(){
+
+current++;
+
+if(current<data.length){
+
+showQuestion();
+
+}
+
+else{
+
+showFinal();
+
+}
+
+}
+
+function showFinal(){
+
+document.getElementById("title").innerHTML="Radhe Radhe Sir 🙏";
+
+animateText(
+
+`Thank you for guiding me toward CA,<br>
+for supporting me,<br>
+for understanding me,<br>
+and for believing in me.<br><br>
+
+You shaped my life.<br><br>
+
+Always grateful.<br><br>
+
+— Rahul`
+
+);
+
+document.getElementById("buttons").innerHTML="";
+
+}
+
+</script>
+
+</body>
+</html>
